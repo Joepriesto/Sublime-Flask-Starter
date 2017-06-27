@@ -1,10 +1,7 @@
 import sublime
 import sublime_plugin
 import os
-import platform
 
-MAC_OS_X = platform.system() == "Darwin"
-IS_LINUX = "linux" in platform.system()
 FLASK_CODE = '''from flask import Flask
 
 app = Flask(__name__)
@@ -25,24 +22,18 @@ class FlaskStarterBase(object):
         if not len(paths):
             raise ValueError("No path data available from SideBar")
         else:
-            path = paths[0] + '\\' + name
-            if MAC_OS_X or IS_LINUX:
-                path = paths[0] + '/' + name
+            path = os.path.join(paths[0], name)
             if not os.path.exists(path):
                 os.makedirs(path)
             return path
 
     @staticmethod
     def createSubFiles(name, path):
-        dirs = [path + '\\static', path + '\\templates']
-        if MAC_OS_X or IS_LINUX:
-            dirs = [path + '/static', path + '/templates']
+        dirs = [os.path.join(path, 'static'), os.path.join(path, 'templates')]
         for dir in dirs:
             if not os.path.exists(dir):
                 os.makedirs(dir)
-        appPath = path + '\\' + name + '.py'
-        if MAC_OS_X or IS_LINUX:
-            appPath = path + '/' + name + '.py'
+        appPath = os.path.join(path, (name + '.py'))
         with open(appPath, 'w') as f:
             f.write(FLASK_CODE)
 
@@ -60,9 +51,7 @@ class RelativeflaskCommand(sublime_plugin.TextCommand):
         FlaskStarterBase.createSubFiles(name, folderName)
 
     def getFolderName(self, file):
-        if MAC_OS_X or IS_LINUX:
-            return file.replace(file.split('/')[-1], '')
-        return file.replace(file.split('\\')[-1], '')
+        return os.path.basename(file)
 
 
 class NewflaskCommand(sublime_plugin.WindowCommand):
