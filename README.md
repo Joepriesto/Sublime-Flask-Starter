@@ -1,18 +1,20 @@
-##Sublime Text 3 Flask Starter
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/07fa8d41b8a840eaba02cb4f5a9ef0ee)](https://www.codacy.com/app/joe.priestman/Sublime-Flask-Starter?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=Joepriesto/Sublime-Flask-Starter&amp;utm_campaign=Badge_Grade)
+
+## Sublime Text 3 Flask Starter
 
 This is a Sublime Text 3 Plugin to generate a skeleton flask app template which can be then used for creating Flask based websites. 
 
-###Installation
+### Installation
 
-####By Package Control
+#### By Package Control
 
 Open Package Control from Sublime Text 3 via the Command Pallete and search for Flask Starter and then Install it.
 
-####Manually
+#### Manually
 
 First, `git clone` this repository and then copy it's contents into any subfolder of your choice in the Packages Directory of Sublime Text (Click Preferences -> Browse Packages)
 
-###Usage
+### Usage
 
 There are many ways to use this Plugin.
 
@@ -22,6 +24,6 @@ You can also right click in any open file (in the editor region) and follow the 
 
 The same can be achieved by using the Command Pallete and searching for Flask or by clicking Tools -> New Flask App
 
-###About
+### About
 
 This plugin is created by Pradipta (geekpradd) using the Sublime Plugins API and Python 3.3 for Sublime Text 3.
