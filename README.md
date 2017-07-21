@@ -1,4 +1,5 @@
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/07fa8d41b8a840eaba02cb4f5a9ef0ee)](https://www.codacy.com/app/joe.priestman/Sublime-Flask-Starter?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=Joepriesto/Sublime-Flask-Starter&amp;utm_campaign=Badge_Grade)
+(https://travis-ci.org/Joepriesto/Sublime-Flask-Starter.svg?branch=master)
 
 ## Sublime Text 3 Flask Starter
 
