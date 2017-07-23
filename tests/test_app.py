@@ -19,4 +19,4 @@ class FlaskStarterTestCase(unittest.TestCase):
         self.view.run_command("relativeFlask", {'s': "TestProject"})
         self.assertTrue(os.path.exists(os.path.join(self.view.file_name(),
                                                     'TestProject'),
-                        msg="Project Creation Test Failed")
+                        msg="Project Creation Test Failed"))
