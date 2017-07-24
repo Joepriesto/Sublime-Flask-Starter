@@ -6,6 +6,7 @@ import os
 class FlaskStarterTestCase(unittest.TestCase):
     def setUp(self):
         self.view = sublime.active_window().new_file()
+        self.view.set_name("test.py")
         s = sublime.load_settings("Preferences.sublime-settings")
         s.set("close_windows_when_empty", False)
 
@@ -16,6 +17,7 @@ class FlaskStarterTestCase(unittest.TestCase):
             self.view.window().run_command("close_file")
 
     def testCommand(self):
+        print(self.view.file_name())
         self.view.run_command("relativeFlask", {'s': "TestProject"})
         self.assertTrue(os.path.exists(os.path.join(self.view.file_name(),
                                                     'TestProject'),
