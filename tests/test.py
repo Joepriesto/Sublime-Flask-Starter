@@ -2,11 +2,15 @@ import unittest
 import sublime
 import os
 
+version = sublime.version()
+
 
 class FlaskStarterTestCase(unittest.TestCase):
+
     def setUp(self):
-        self.view = sublime.active_window().new_file()
-        self.view.set_name("test.py")
+        file = open("t.py", mode="w")
+        file.close()
+        self.view = sublime.active_window().open_file("t.py")
         s = sublime.load_settings("Preferences.sublime-settings")
         s.set("close_windows_when_empty", False)
 
