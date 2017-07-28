@@ -51,7 +51,7 @@ class RelativeflaskCommand(sublime_plugin.TextCommand):
         FlaskStarterBase.createSubFiles(name, folderName)
 
     def getFolderName(self, file):
-        return os.path.basename(file)
+        return os.path.dirname(file)
 
 
 class NewflaskCommand(sublime_plugin.WindowCommand):

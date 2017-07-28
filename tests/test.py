@@ -1,16 +1,27 @@
 import unittest
 import sublime
 import os
+import sys
+from shutil import rmtree
 
 version = sublime.version()
+
+
+# for testing internal function
+if version < '3000':
+    # st2
+    flask_startr = sys.modules["flask-starter"]
+else:
+    # st3
+    flask_startr = sys.modules["Sublime-Flask-Starter.flask-starter"]
 
 
 class FlaskStarterTestCase(unittest.TestCase):
 
     def setUp(self):
-        file = open("t.py", mode="w")
-        file.close()
+        file = os.open("t.py", os.O_CREAT)
         self.view = sublime.active_window().open_file("t.py")
+        self.view.run_command("save")
         s = sublime.load_settings("Preferences.sublime-settings")
         s.set("close_windows_when_empty", False)
 
@@ -19,10 +30,30 @@ class FlaskStarterTestCase(unittest.TestCase):
             self.view.set_scratch(True)
             self.view.window().focus_view(self.view)
             self.view.window().run_command("close_file")
+        os.remove("t.py")
+            
+    def clearProject(self, path):
+        rmtree(path)
 
-    def testCommand(self):
-        print(self.view.file_name())
-        self.view.run_command("relativeFlask", {'s': "TestProject"})
-        self.assertTrue(os.path.exists(os.path.join(self.view.file_name(),
-                                                    'TestProject'),
-                        msg="Project Creation Test Failed"))
+    def testCreateFolders(self):
+        name = 'TestProject'
+        startDirectory = os.path.dirname(self.view.file_name())
+        expectedDirectory = os.path.join(startDirectory, name)
+        flask_startr.FlaskStarterBase.createFolder(name, [startDirectory])
+        self.assertTrue(os.path.exists(expectedDirectory), msg="Project Creation Test Failed")
+        self.clearProject(expectedDirectory)
+
+    def testRelativeCommand(self):
+        name = 'TestProject'
+        startDirectory = os.path.dirname(self.view.file_name())
+        expectedDirectory = os.path.join(startDirectory, name)
+        tCommand = flask_startr.RelativeflaskCommand(self.view)
+        tCommand.path = [startDirectory]
+        tCommand.rest(name)
+        self.assertTrue(os.path.exists(expectedDirectory), msg="Project Creation Test Failed")
+        self.clearProject(expectedDirectory)
+
+
+
+if __name__ == '__main__':
+    unittest.main()
