@@ -19,6 +19,7 @@ else:
 class FlaskStarterTestCase(unittest.TestCase):
 
     def setUp(self):
+        os.chdir(os.path.expanduser("~"))
         file = os.open("t.py", os.O_CREAT)
         self.view = sublime.active_window().open_file("t.py")
         self.view.run_command("save")
