@@ -22,10 +22,14 @@ class FlaskStarterBase(object):
         if not len(paths):
             raise ValueError("No path data available from SideBar")
         else:
-            path = os.path.join(paths[0], name)
-            if not os.path.exists(path):
-                os.makedirs(path)
-            return path
+            try:
+                path = os.path.join(paths[0], name)
+                if not os.path.exists(path):
+                    os.makedirs(path)
+                return path
+            except os.PermissionError as e:
+                raise e(sublime.view.file_name())
+
 
     @staticmethod
     def createSubFiles(name, path):
