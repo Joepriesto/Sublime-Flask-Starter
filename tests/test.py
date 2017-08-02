@@ -40,6 +40,7 @@ class FlaskStarterTestCase(unittest.TestCase):
         name = 'TestProject'
         startDirectory = os.path.dirname(self.view.file_name())
         expectedDirectory = os.path.join(startDirectory, name)
+        self.assertIsNot(startDirectory, "/")
         flask_startr.FlaskStarterBase.createFolder(name, [startDirectory])
         self.assertTrue(os.path.exists(expectedDirectory), msg="Project Creation Test Failed")
         self.clearProject(expectedDirectory)
@@ -54,6 +55,11 @@ class FlaskStarterTestCase(unittest.TestCase):
         self.assertTrue(os.path.exists(expectedDirectory), msg="Project Creation Test Failed")
         self.clearProject(expectedDirectory)
 
+    def testExceptionMessage(self):
+        directory = "/"
+        name = "Fail"
+        with self.assertRaises(ValueError) as cm:
+            flask_startr.FlaskStarterBase.createFolder(name, [directory])
 
 
 if __name__ == '__main__':
