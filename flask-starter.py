@@ -27,7 +27,7 @@ class FlaskStarterBase(object):
                 if not os.path.exists(path):
                     os.makedirs(path)
                 return path
-            except os.PermissionError as e:
+            except PermissionError as e:
                 raise e(sublime.view.file_name())
 
 
