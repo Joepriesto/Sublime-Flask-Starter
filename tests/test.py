@@ -20,9 +20,10 @@ class FlaskStarterTestCase(unittest.TestCase):
 
     def setUp(self):
         os.chdir(os.path.expanduser("~"))
-        file = os.open("t.py", os.O_CREAT)
-        self.view = sublime.active_window().open_file("t.py")
-        self.r = self.view.run_command("save")
+        testfile = os.path.join(os.path.expanduser("~"),"t.py")
+        file = os.open(testfile, os.O_CREAT)
+        self.view = sublime.active_window().open_file(testfile)
+        self.view.run_command("save")
         s = sublime.load_settings("Preferences.sublime-settings")
         s.set("close_windows_when_empty", False)
 
@@ -41,7 +42,6 @@ class FlaskStarterTestCase(unittest.TestCase):
         startDirectory, filename = os.path.split(self.view.file_name())
         expectedDirectory = os.path.join(startDirectory, name)
         self.assertFalse(os.path.exists("/t.py"), msg="A file exists at root!!!")
-        self.assertIsNotNone(self.r, msg="r = %s" % self.r)
         # self.assertIsNot(startDirectory, "/", 
         #     msg=("file_name = %(1)s & cwd = %(2)s, dir = %(4)s & dirname= %(3)s" % {"1": self.view.file_name(), "2": os.getcwd(), "3": startDirectory, "4": os.path.dirname(os.getcwd())}))
         flask_startr.FlaskStarterBase.createFolder(name, [startDirectory])
