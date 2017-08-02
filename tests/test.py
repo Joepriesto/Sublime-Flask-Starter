@@ -40,15 +40,15 @@ class FlaskStarterTestCase(unittest.TestCase):
         name = 'TestProject'
         startDirectory, filename = os.path.split(self.view.file_name())
         expectedDirectory = os.path.join(startDirectory, name)
-        self.assertIsNot(startDirectory, "/", 
-            msg=("file_name = %(1)s & cwd = %(2)s, dir = %(4)s & dirname= %(3)s" % {"1": self.view.file_name(), "2": os.getcwd(), "3": startDirectory, "4": os.path.dirname(os.getcwd())}))
+        # self.assertIsNot(startDirectory, "/", 
+        #     msg=("file_name = %(1)s & cwd = %(2)s, dir = %(4)s & dirname= %(3)s" % {"1": self.view.file_name(), "2": os.getcwd(), "3": startDirectory, "4": os.path.dirname(os.getcwd())}))
         flask_startr.FlaskStarterBase.createFolder(name, [startDirectory])
         self.assertTrue(os.path.exists(expectedDirectory), msg="Project Creation Test Failed")
         self.clearProject(expectedDirectory)
 
     def testRelativeCommand(self):
         name = 'TestProject'
-        startDirectory = os.path.dirname(self.view.file_name())
+        startDirectory, filename = os.path.split(self.view.file_name())
         expectedDirectory = os.path.join(startDirectory, name)
         tCommand = flask_startr.RelativeflaskCommand(self.view)
         tCommand.path = [startDirectory]
