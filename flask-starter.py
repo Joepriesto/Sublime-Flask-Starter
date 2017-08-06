@@ -1,6 +1,8 @@
 import sublime
 import sublime_plugin
 import os
+from subprocess import call
+from .venv import FlaskVirtualEnv
 
 FLASK_CODE = '''from flask import Flask
 
@@ -30,7 +32,6 @@ class FlaskStarterBase(object):
             except PermissionError as e:
                 raise ValueError(("name = %(1)s & paths = %(2)s" % {"1": name, "2": paths}))
 
-
     @staticmethod
     def createSubFiles(name, path):
         dirs = [os.path.join(path, 'static'), os.path.join(path, 'templates')]
@@ -40,6 +41,14 @@ class FlaskStarterBase(object):
         appPath = os.path.join(path, (name + '.py'))
         with open(appPath, 'w') as f:
             f.write(FLASK_CODE)
+
+    @staticmethod
+    def createVenv(path):
+        if sublime.yes_no_cancel_dialog("Do you want to create a virtualenv?") == sublime.DIALOG_YES:
+            newVenv = FlaskVirtualEnv(path)
+            newVenv.createVenv()
+            newVenv.installModules()
+
 
 
 class RelativeflaskCommand(sublime_plugin.TextCommand):

@@ -20,7 +20,7 @@ class FlaskStarterTestCase(unittest.TestCase):
 
     def setUp(self):
         os.chdir(os.path.expanduser("~"))
-        testfile = os.path.join(os.path.expanduser("~"),"t.py")
+        testfile = os.path.join(os.path.expanduser("~"), "t.py")
         file = os.open(testfile, os.O_CREAT)
         self.view = sublime.active_window().open_file(testfile)
         self.view.run_command("save")
@@ -33,7 +33,7 @@ class FlaskStarterTestCase(unittest.TestCase):
             self.view.window().focus_view(self.view)
             self.view.window().run_command("close_file")
         os.remove("t.py")
-            
+
     def clearProject(self, path):
         rmtree(path)
 
@@ -41,11 +41,11 @@ class FlaskStarterTestCase(unittest.TestCase):
         name = 'TestProject'
         startDirectory, filename = os.path.split(self.view.file_name())
         expectedDirectory = os.path.join(startDirectory, name)
-        self.assertFalse(os.path.exists("/t.py"), msg="A file exists at root!!!")
-        # self.assertIsNot(startDirectory, "/", 
-        #     msg=("file_name = %(1)s & cwd = %(2)s, dir = %(4)s & dirname= %(3)s" % {"1": self.view.file_name(), "2": os.getcwd(), "3": startDirectory, "4": os.path.dirname(os.getcwd())}))
+        self.assertFalse(os.path.exists("/t.py"),
+                         msg="A file exists at root!!!")
         flask_startr.FlaskStarterBase.createFolder(name, [startDirectory])
-        self.assertTrue(os.path.exists(expectedDirectory), msg="Project Creation Test Failed")
+        self.assertTrue(os.path.exists(expectedDirectory),
+                        msg="Project Creation Test Failed")
         self.clearProject(expectedDirectory)
 
     def testRelativeCommand(self):
@@ -55,13 +55,14 @@ class FlaskStarterTestCase(unittest.TestCase):
         tCommand = flask_startr.RelativeflaskCommand(self.view)
         tCommand.path = [startDirectory]
         tCommand.rest(name)
-        self.assertTrue(os.path.exists(expectedDirectory), msg="Project Creation Test Failed")
+        self.assertTrue(os.path.exists(expectedDirectory),
+                        msg="Project Creation Test Failed")
         self.clearProject(expectedDirectory)
 
     def testExceptionMessage(self):
         directory = "/"
         name = "Fail"
-        with self.assertRaises(ValueError) as cm:
+        with self.assertRaises(ValueError):
             flask_startr.FlaskStarterBase.createFolder(name, [directory])
 
 
