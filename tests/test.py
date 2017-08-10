@@ -21,7 +21,7 @@ class FlaskStarterTestCase(unittest.TestCase):
     def setUp(self):
         os.chdir(os.path.expanduser("~"))
         testfile = os.path.join(os.path.expanduser("~"), "t.py")
-        file = os.open(testfile, os.O_CREAT)
+        testfile = os.path.join(os.path.expanduser("~"),"t.py")
         self.view = sublime.active_window().open_file(testfile)
         self.view.run_command("save")
         s = sublime.load_settings("Preferences.sublime-settings")
@@ -34,15 +34,15 @@ class FlaskStarterTestCase(unittest.TestCase):
             self.view.window().run_command("close_file")
         os.remove("t.py")
 
-    def clearProject(self, path):
+    @staticmethod
+    def clearProject(path):
         rmtree(path)
 
     def testCreateFolders(self):
         name = 'TestProject'
-        startDirectory, filename = os.path.split(self.view.file_name())
+        startDirectory = os.path.split(self.view.file_name())[0]
         expectedDirectory = os.path.join(startDirectory, name)
-        self.assertFalse(os.path.exists("/t.py"),
-                         msg="A file exists at root!!!")
+        self.assertFalse(os.path.exists("/t.py"), msg="A file exists at root!!!")
         flask_startr.FlaskStarterBase.createFolder(name, [startDirectory])
         self.assertTrue(os.path.exists(expectedDirectory),
                         msg="Project Creation Test Failed")
@@ -50,7 +50,7 @@ class FlaskStarterTestCase(unittest.TestCase):
 
     def testRelativeCommand(self):
         name = 'TestProject'
-        startDirectory, filename = os.path.split(self.view.file_name())
+        startDirectory = os.path.split(self.view.file_name())[0]
         expectedDirectory = os.path.join(startDirectory, name)
         tCommand = flask_startr.RelativeflaskCommand(self.view)
         tCommand.path = [startDirectory]

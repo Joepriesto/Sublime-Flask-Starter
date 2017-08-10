@@ -30,15 +30,15 @@ class FlaskStarterBase(object):
                 if not os.path.exists(path):
                     os.makedirs(path)
                 return path
-            except PermissionError as e:
+            except PermissionError:
                 raise ValueError(("name = %(1)s & paths = %(2)s" % {"1": name, "2": paths}))
 
     @staticmethod
     def createSubFiles(name, path):
         dirs = [os.path.join(path, 'static'), os.path.join(path, 'templates')]
-        for dir in dirs:
-            if not os.path.exists(dir):
-                os.makedirs(dir)
+        for d in dirs:
+            if not os.path.exists(d):
+                os.makedirs(d)
         appPath = os.path.join(path, (name + '.py'))
         with open(appPath, 'w') as f:
             f.write(FLASK_CODE)
@@ -58,21 +58,22 @@ class RelativeflaskCommand(sublime_plugin.TextCommand):
         self.path = [self.getFolderName(f)]
         sublime.active_window().show_input_panel(
             "Please enter Project Name:",
-            '', lambda s: self.rest(s), None, None)
+            '', self.rest, None, None)
 
     def rest(self, name):
         folderName = FlaskStarterBase.createFolder(name, self.path)
         FlaskStarterBase.createSubFiles(name, folderName)
 
-    def getFolderName(self, file):
+    @staticmethod
+    def getFolderName(file):
         return os.path.dirname(file)
 
 
 class NewflaskCommand(sublime_plugin.WindowCommand):
-    def run(self, paths=[]):
-        self.path = paths
+    def run(self, paths=None):
+        self.path = paths or []
         self.window.show_input_panel(
-            "Please enter Project Name:", '', lambda s: self.doRest(s), None, None)
+            "Please enter Project Name:", '', self.doRest, None, None)
 
     def doRest(self, name):
         folderName = FlaskStarterBase.createFolder(name, self.path)
