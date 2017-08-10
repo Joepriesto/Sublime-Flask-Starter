@@ -26,6 +26,7 @@ class FlaskStarterBase(object):
         else:
             try:
                 path = os.path.join(paths[0], name)
+                FlaskStarterBase.createVenv(path)
                 if not os.path.exists(path):
                     os.makedirs(path)
                 return path
