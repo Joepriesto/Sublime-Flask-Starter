@@ -27,4 +27,7 @@ The same can be achieved by using the Command Pallete and searching for Flask or
 
 ### About
 
-This plugin is created by Pradipta (geekpradd) using the Sublime Plugins API and Python 3.3 for Sublime Text 3.
+This plugin was created by Pradipta (geekpradd) using the Sublime Plugins API and Python 3.3 for Sublime Text 3.
+It is now maintained by Joe Priestman (joepriesto).
+
+If you are interested in helping out please feel free to message me!
