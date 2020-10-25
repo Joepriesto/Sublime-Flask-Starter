@@ -25,6 +25,10 @@ You can also right click in any open file (in the editor region) and follow the 
 
 The same can be achieved by using the Command Pallete and searching for Flask or by clicking Tools -> New Flask App
 
+## Application Factory Model
+
+You can also create a Flask App using the Application Factory Model. Simple follow the commands above but use "New Flask App (Factory)".
+
 ### About
 
 This plugin was created by Pradipta (geekpradd) using the Sublime Plugins API and Python 3.3 for Sublime Text 3.

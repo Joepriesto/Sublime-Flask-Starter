@@ -3,5 +3,10 @@
         "caption": "Flask: Create New App (relative to Open File)",
         "command": "relativeflask",
         "args": {"n": ""}
+    },
+    {
+        "caption": "Flask: Create New Factory App (relative to Open File)",
+        "command": "relativeflaskFactory",
+        "args": {"n": ""}
     }
     ]

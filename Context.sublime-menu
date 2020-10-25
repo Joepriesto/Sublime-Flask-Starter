@@ -1,4 +1,6 @@
 [
 	{"caption":"New Flask App",
-	"command" : "relativeflask"}
+	"command" : "relativeflask"},
+	{"caption":"New Flask Factory App",
+	"command" : "relativeflaskFactory"}
 ]

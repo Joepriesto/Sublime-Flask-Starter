@@ -1,1 +1,2 @@
-[{ "caption": "New Flask App", 	      "id": "flask-project",         "command": "newflask","args": {"paths": []}}]
+[{ "caption": "New Flask App", 	      "id": "flask-project",         "command": "newflask","args": {"paths": []}},
+{ "caption": "New Flask Factory App", 	      "id": "flask-project",         "command": "newflaskfactory","args": {"paths": []}}]
