@@ -1,4 +1,17 @@
 [
-	{"caption":"New Flask App",
-	"command" : "relativeflask"}
+	{
+		"caption": "Flask Starter",
+		"id": "flask_context",
+		"children":
+		[
+			{
+				"caption":"New Flask App",
+				"command" : "relativeflask"
+			},
+			{
+				"caption":"New Flask Factory App",
+				"command" : "relativeflaskfactory"
+			}
+		]
+	}
 ]

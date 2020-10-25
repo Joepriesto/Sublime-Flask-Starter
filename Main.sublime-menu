@@ -1,16 +1,19 @@
 [
-{
-    "caption": "Tools",
+    {
+        "caption": "Tools",
         "mnemonic": "t",
         "id": "tools",
+        "children":
+        [
+            {
+                "caption":"New Flask App",
+                "command" : "relativeflask"
+            },
+            {
+                "caption":"New Flask Factory App",
+                "command" : "relativeflaskfactory"
+            }
 
-    "children":
-    [
-{"caption":"New Flask App",
-"command" : "relativeflask",
-
-},
-
-    ]
-}
+        ]
+    }
 ]
