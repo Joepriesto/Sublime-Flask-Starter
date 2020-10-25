@@ -93,7 +93,7 @@ class RelativeflaskCommand(sublime_plugin.TextCommand):
     def getFolderName(file):
         return os.path.dirname(file)
 
-class RelativeflaskFactoryCommand(sublime_plugin.TextCommand):
+class RelativeflaskfactoryCommand(sublime_plugin.TextCommand):
     def run(self, edit):
         f = self.view.file_name()
         self.path = [self.getFolderName(f)]
@@ -119,7 +119,7 @@ class NewflaskCommand(sublime_plugin.WindowCommand):
         folderName = FlaskStarterBase.createFolder(name, self.path)
         FlaskStarterBase.createSubFiles(name, folderName)
 
-class NewflaskFactoryCommand(sublime_plugin.WindowCommand):
+class NewflaskfactoryCommand(sublime_plugin.WindowCommand):
     def run(self, paths=None):
         self.path = paths or []
         self.window.show_input_panel(
